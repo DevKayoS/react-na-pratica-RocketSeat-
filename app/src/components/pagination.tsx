@@ -15,31 +15,32 @@ interface PaginationProps {
   page: number
 }
 
-export function Pagination({ items, page, pages }: PaginationProps) {
+export function Pagination({pages, items, page}: PaginationProps) {
   const [, setSearchParams] = useSearchParams()
 
   function firstPage() {
-    setSearchParams(params => {
-      params.set('page', '1')
+      setSearchParams(params => {
+        params.set('page', '1')
 
-      return params
-    })
+        return params
+      })
+
   }
 
   function previousPage() {
-    if (page - 1 <= 0) {
+    if (page - 1 <= 0){
       return
     }
 
     setSearchParams(params => {
-      params.set('page', String(page - 1))
+      params.set('page', String(page -1))
 
       return params
     })
   }
 
   function nextPage() {
-    if (page + 1 > pages) {
+    if (page + 1 > pages){
       return
     }
 
@@ -75,22 +76,22 @@ export function Pagination({ items, page, pages }: PaginationProps) {
           </Select>
         </div>
 
-        <span>Page {page} of {pages}</span>
+        <span>Page {page} of {pages} </span>
 
         <div className="space-x-1.5">
           <Button onClick={firstPage} size="icon" disabled={page - 1 <= 0}>
             <ChevronsLeft className="size-4" />
             <span className="sr-only">First page</span>
           </Button>
-          <Button onClick={previousPage} size="icon" disabled={page - 1 <= 0}>
+          <Button onClick={previousPage} disabled={page - 1 <= 0}>
             <ChevronLeft className="size-4" />
             <span className="sr-only">Previous page</span>
           </Button>
-          <Button onClick={nextPage} size="icon" disabled={page + 1 > pages}>
-            <ChevronRight className="size-4" />
+          <Button onClick={nextPage} disabled={page + 1 > pages}>
+            <ChevronRight className="size-4"/>
             <span className="sr-only">Next page</span>
           </Button>
-          <Button onClick={lastPage} size="icon" disabled={page + 1 > pages}>
+          <Button onClick={lastPage} disabled={page + 1 > pages}>
             <ChevronsRight className="size-4" />
             <span className="sr-only">Last page</span>
           </Button>
